@@ -7,7 +7,15 @@ interface UserMenuContextType {
   closeUserMenu: () => void;
 }
 
-const UserMenuContext = createContext<UserMenuContextType | undefined>(undefined);
+// Initialize with default values to avoid undefined errors
+const defaultState: UserMenuContextType = {
+  userMenuOpen: false,
+  toggleUserMenu: () => {},
+  openUserMenu: () => {},
+  closeUserMenu: () => {},
+};
+
+const UserMenuContext = createContext<UserMenuContextType>(defaultState);
 
 export const UserMenuProvider = ({ children }: { children: ReactNode }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -41,15 +49,15 @@ export const UserMenuProvider = ({ children }: { children: ReactNode }) => {
     };
   }, [userMenuOpen]);
 
+  const value = {
+    userMenuOpen,
+    toggleUserMenu,
+    openUserMenu,
+    closeUserMenu,
+  };
+
   return (
-    <UserMenuContext.Provider
-      value={{
-        userMenuOpen,
-        toggleUserMenu,
-        openUserMenu,
-        closeUserMenu,
-      }}
-    >
+    <UserMenuContext.Provider value={value}>
       {children}
     </UserMenuContext.Provider>
   );
@@ -57,8 +65,5 @@ export const UserMenuProvider = ({ children }: { children: ReactNode }) => {
 
 export const useUserMenu = (): UserMenuContextType => {
   const context = useContext(UserMenuContext);
-  if (context === undefined) {
-    throw new Error("useUserMenu must be used within a UserMenuProvider");
-  }
   return context;
 };

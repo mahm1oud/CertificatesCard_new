@@ -7,7 +7,15 @@ interface MobileMenuContextType {
   closeMobileMenu: () => void;
 }
 
-const MobileMenuContext = createContext<MobileMenuContextType | undefined>(undefined);
+// Initialize with default values to avoid undefined errors
+const defaultState: MobileMenuContextType = {
+  mobileMenuOpen: false,
+  toggleMobileMenu: () => {},
+  openMobileMenu: () => {},
+  closeMobileMenu: () => {},
+};
+
+const MobileMenuContext = createContext<MobileMenuContextType>(defaultState);
 
 export const MobileMenuProvider = ({ children }: { children: ReactNode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,15 +32,15 @@ export const MobileMenuProvider = ({ children }: { children: ReactNode }) => {
     setMobileMenuOpen(false);
   };
 
+  const value = {
+    mobileMenuOpen,
+    toggleMobileMenu,
+    openMobileMenu,
+    closeMobileMenu,
+  };
+
   return (
-    <MobileMenuContext.Provider
-      value={{
-        mobileMenuOpen,
-        toggleMobileMenu,
-        openMobileMenu,
-        closeMobileMenu,
-      }}
-    >
+    <MobileMenuContext.Provider value={value}>
       {children}
     </MobileMenuContext.Provider>
   );
@@ -40,8 +48,5 @@ export const MobileMenuProvider = ({ children }: { children: ReactNode }) => {
 
 export const useMobileMenu = (): MobileMenuContextType => {
   const context = useContext(MobileMenuContext);
-  if (context === undefined) {
-    throw new Error("useMobileMenu must be used within a MobileMenuProvider");
-  }
   return context;
 };
