@@ -33,9 +33,7 @@ const RequirementsCheck = ({ onComplete }: { onComplete: (passed: boolean) => vo
   useEffect(() => {
     const checkRequirements = async () => {
       try {
-        const response = await apiRequest("/api/installer/check-requirements", {
-          method: "GET"
-        });
+        const response = await apiRequest("GET", "/api/installer/check-requirements");
         
         if (response) {
           setChecks(response);
@@ -262,17 +260,14 @@ const AdminSetup = ({ onComplete }: { onComplete: (success: boolean) => void }) 
     setLoading(true);
 
     try {
-      const response = await apiRequest("/api/installer/setup-admin", {
-        method: "POST",
-        data: {
-          name: formData.name,
-          email: formData.email,
-          username: formData.username,
-          password: formData.password,
-        },
+      const response = await apiRequest("POST", "/api/installer/setup-admin", {
+        name: formData.name,
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
       });
 
-      if (response.success) {
+      if (response && response.success) {
         toast({
           title: "نجاح!",
           description: "تم إنشاء حساب المدير بنجاح.",
@@ -282,7 +277,7 @@ const AdminSetup = ({ onComplete }: { onComplete: (success: boolean) => void }) 
       } else {
         toast({
           title: "خطأ",
-          description: response.message || "فشل إنشاء حساب المدير.",
+          description: response?.message || "فشل إنشاء حساب المدير.",
           variant: "destructive",
         });
         onComplete(false);
@@ -398,12 +393,9 @@ const SiteSetup = ({ onComplete }: { onComplete: (success: boolean) => void }) =
     setLoading(true);
 
     try {
-      const response = await apiRequest("/api/installer/setup-site", {
-        method: "POST",
-        data: formData,
-      });
+      const response = await apiRequest("POST", "/api/installer/setup-site", formData);
 
-      if (response.success) {
+      if (response && response.success) {
         toast({
           title: "نجاح!",
           description: "تم إعداد معلومات الموقع بنجاح.",
@@ -413,7 +405,7 @@ const SiteSetup = ({ onComplete }: { onComplete: (success: boolean) => void }) =
       } else {
         toast({
           title: "خطأ",
-          description: response.message || "فشل إعداد معلومات الموقع.",
+          description: response?.message || "فشل إعداد معلومات الموقع.",
           variant: "destructive",
         });
         onComplete(false);
@@ -576,8 +568,12 @@ export default function InstallerPage() {
 
   const checkInstallation = useCallback(async () => {
     try {
-      const response = await apiRequest("/api/installer/status");
-      setIsInstalled(response.installed);
+      const response = await apiRequest("GET", "/api/installer/status");
+      if (response) {
+        setIsInstalled(response.installed);
+      } else {
+        setIsInstalled(false);
+      }
     } catch (error) {
       console.error("Failed to check installation status:", error);
       setIsInstalled(false);
