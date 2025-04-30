@@ -29,6 +29,7 @@ import {
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { ThemeToggle } from "@/components/theme-toggle";
 import CustomForm from "@/components/forms/custom-form";
 import WeddingForm from "@/components/forms/wedding-form";
 import EngagementForm from "@/components/forms/legacy/engagement-form";
@@ -542,34 +543,38 @@ export default function HomePageSinglePage() {
           />
         </div>
         
-        {user ? (
-          <div className="flex items-center justify-center gap-4">
-            <Button asChild>
-              <Link href="/user/dashboard">
-                <User className="h-4 w-4 ml-2" />
-                لوحة التحكم
-              </Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/user/cards">
-                عرض بطاقاتي
-              </Link>
-            </Button>
-          </div>
-        ) : (
-          <div className="flex items-center justify-center gap-4">
-            <Button asChild>
-              <Link href="/auth">
-                تسجيل الدخول
-              </Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/auth?tab=register">
-                إنشاء حساب
-              </Link>
-            </Button>
-          </div>
-        )}
+        <div className="flex flex-col items-center justify-center gap-4">
+          {user ? (
+            <div className="flex items-center justify-center gap-4">
+              <Button asChild>
+                <Link href="/user/dashboard">
+                  <User className="h-4 w-4 ml-2" />
+                  لوحة التحكم
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/user/cards">
+                  عرض بطاقاتي
+                </Link>
+              </Button>
+              <ThemeToggle />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-4">
+              <Button asChild>
+                <Link href="/auth">
+                  تسجيل الدخول
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/auth?tab=register">
+                  إنشاء حساب
+                </Link>
+              </Button>
+              <ThemeToggle />
+            </div>
+          )}
+        </div>
       </section>
       
       {/* Categories Section */}
