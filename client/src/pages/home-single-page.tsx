@@ -31,10 +31,10 @@ import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import CustomForm from "@/components/forms/custom-form";
 import WeddingForm from "@/components/forms/wedding-form";
-import EngagementForm from "@/components/forms/engagement-form";
-import GraduationForm from "@/components/forms/graduation-form";
-import EidForm from "@/components/forms/eid-form";
-import RamadanForm from "@/components/forms/ramadan-form";
+import EngagementForm from "@/components/forms/legacy/engagement-form";
+import GraduationForm from "@/components/forms/legacy/graduation-form";
+import EidForm from "@/components/forms/legacy/eid-form";
+import RamadanForm from "@/components/forms/legacy/ramadan-form";
 import { getCategoryName, downloadImage } from "@/lib/utils";
 import ShareOptions from "@/components/share-options";
 import {
