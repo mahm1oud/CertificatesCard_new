@@ -4,7 +4,8 @@ import { join } from "path";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import { hashPassword } from "../auth";
 import { db } from "../db";
-import { users, settings } from "@shared/schema";
+import { users } from "@shared/schema";
+import { settings } from "@shared/schema";
 import { storage } from "../storage";
 import { sql } from "drizzle-orm";
 
