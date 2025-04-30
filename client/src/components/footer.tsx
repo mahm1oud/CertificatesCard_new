@@ -15,20 +15,14 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/">
-              <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                الرئيسية
-              </a>
+            <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              الرئيسية
             </Link>
-            <Link href="/auth">
-              <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                تسجيل الدخول
-              </a>
+            <Link href="/auth" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              تسجيل الدخول
             </Link>
-            <Link href="/certificates/verify/public">
-              <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                التحقق من الشهادة
-              </a>
+            <Link href="/certificates/verify/public" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              التحقق من الشهادة
             </Link>
           </div>
         </div>
