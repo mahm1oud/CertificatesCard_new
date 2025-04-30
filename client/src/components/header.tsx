@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation, LanguageSwitcher } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -177,8 +178,9 @@ export default function Header() {
                       <div className="px-2 py-1.5">
                         <p className="text-xs text-muted-foreground">الإعدادات</p>
                       </div>
-                      <div className="px-4 py-2">
+                      <div className="px-4 py-2 flex items-center gap-2">
                         <LanguageSwitcher />
+                        <ThemeToggle />
                       </div>
                       <Separator className="my-2" />
                       <SheetClose asChild>
@@ -225,8 +227,9 @@ export default function Header() {
                       <div className="px-2 py-1.5">
                         <p className="text-xs text-muted-foreground">الإعدادات</p>
                       </div>
-                      <div className="px-4 py-2">
+                      <div className="px-4 py-2 flex items-center gap-2">
                         <LanguageSwitcher />
+                        <ThemeToggle />
                       </div>
                     </>
                   )}
@@ -388,8 +391,9 @@ export default function Header() {
                 
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>الإعدادات</DropdownMenuLabel>
-                <div className="p-2">
+                <div className="p-2 flex items-center gap-2">
                   <LanguageSwitcher />
+                  <ThemeToggle />
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
