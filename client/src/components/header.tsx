@@ -408,6 +408,7 @@ export default function Header() {
           ) : (
             <div className="flex space-x-2 space-x-reverse items-center">
               <LanguageSwitcher />
+              <ThemeToggle />
               <Button size="sm" variant="outline" asChild>
                 <Link href="/auth">
                   تسجيل الدخول
